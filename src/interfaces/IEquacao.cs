@@ -1,7 +1,6 @@
-﻿namespace SistemaDoGilmar.interfaces
+﻿namespace SistemaDoGilmar.interfaces;
+
+public interface IEquacao
 {
-    public interface IEquacao
-    {
-        double GetResultado();
-    }
+    double GetResultado();
 }
