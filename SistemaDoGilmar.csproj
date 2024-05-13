@@ -42,7 +42,7 @@
     <ItemGroup>
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="src\interfaces\Equacao.cs" />
+        <Compile Include="src\interfaces\IEquacao.cs" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="tests\" />
