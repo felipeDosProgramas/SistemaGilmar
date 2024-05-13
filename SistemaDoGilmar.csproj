@@ -49,7 +49,7 @@
         <Compile Include="src\interfaces\IEquacao.cs" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="tests\" />
+      <Folder Include="tests\Entradas\" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
