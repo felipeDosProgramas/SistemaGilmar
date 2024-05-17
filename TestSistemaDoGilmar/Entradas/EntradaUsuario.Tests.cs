@@ -12,17 +12,6 @@ public class EntradaUsuarioTest
 {
     private EntradaUsuario _entradaUsuarioCircunflexa;
     private EntradaUsuario _entradaUsuarioLp;
-    // [Test]
-    // public void EntradaComAcentoCircunflexo_AindaNaoImplmementada()
-    // {
-        // Assert.Catch<NotImplementedException>(() =>
-        // {
-            // _entradaUsuarioCircunflexa = new EntradaUsuario(
-                // "X^2 + 1",
-                // TipoEntrada.NotacaoExponenteAcentoCircunflexo
-            // );
-        // }, "Entrada com Acento circunflexo ainda não foi implementada");
-    // }
 
     [Test]
     public void VerificarSeparacaoEntradaLp_sanitizarEntrada()
@@ -47,12 +36,15 @@ public class EntradaUsuarioTest
             );
         });
     }
-    [Test]
-    public void VerificarSeparacapEntradaLp_VerificarSeEstaSeparando()
+    [TestCase("5x**2 -4*x +8 = 0", 5, -4, 8)]
+    public void VerificarSeparacapEntradaLp_VerificarSeEstaSeparando(string entrada, int a, int b, int c)
     {
         _entradaUsuarioLp = new EntradaUsuario(
-            "4x**2 - 2*x + 5 = 0",
+            entrada,
             TipoEntrada.NotacaoExpoenteLinguagensProgramacao
         );
+        Assert.AreEqual(a, _entradaUsuarioLp.Equacao['a']);
+        Assert.AreEqual(b, _entradaUsuarioLp.Equacao['b']);
+        Assert.AreEqual(c, _entradaUsuarioLp.Equacao['c']);
     }
 }

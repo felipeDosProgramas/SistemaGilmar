@@ -20,9 +20,7 @@ public class EntradaUsuario : AValidacoesEntradaUsuario
             SanitizaEntrada(entrada.ToLower().Trim()),
             validacoes
         );
-        Equacao = tipoEntrada == TipoEntrada.NotacaoExpoenteLinguagensProgramacao
-            ? DividirComNotacaoLp()
-            : throw new NotImplementedException("notação com Expoente escrito em acento circunflexo ainda não implementado");
+        Equacao = DividirTermos();
     }
 
     private string SanitizaEntrada(string entrada)
@@ -45,15 +43,32 @@ public class EntradaUsuario : AValidacoesEntradaUsuario
         => entradaDividida.Add(
             'a',
             EncontrarItemNaStringValidada(new []
-                    { Regexes[5], Regexes[6], Regexes[8] },
+                    { Regexes[6], Regexes[5], Regexes[7] },
                 Entrada
             )
         );
-
-    private Dictionary<char, int> DividirComNotacaoLp()
+    private void AdicionarBNaEntradaDividida(ref Dictionary<char, int> entradaDividida)
+        => entradaDividida.Add(
+            'b',
+            EncontrarItemNaStringValidada(new []
+                    { Regexes[6], Regexes[4], Regexes[8] },
+                Entrada
+            )
+        );
+    private void AdicionarCNaEntradaDividida(ref Dictionary<char, int> entradaDividida)
+        => entradaDividida.Add(
+            'c',
+            EncontrarItemNaStringValidada(new []
+                    { Regexes[4], Regexes[5], Regexes[9] },
+                Entrada
+            )
+        );
+    private Dictionary<char, int> DividirTermos()
     {
         Dictionary<char, int> entradaDividida = new Dictionary<char, int>();
-
+        AdicionarANaEntradaDividida(ref entradaDividida);
+        AdicionarBNaEntradaDividida(ref entradaDividida);
+        AdicionarCNaEntradaDividida(ref entradaDividida);
         return entradaDividida;
     }
 

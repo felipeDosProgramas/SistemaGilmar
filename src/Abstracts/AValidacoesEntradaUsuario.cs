@@ -19,12 +19,12 @@ public abstract class AValidacoesEntradaUsuario
         @"[1-9]x\*\*[3-9]+", // validar se tem algo fora do comum com a notação LP
         @"^([0-9]*?x\^2){1}(\+|-[0-9]+\*x)?(([+\-])[0-9]+)?(=0){1}$", // identificar a conta inteira com a notação circunflexa
         @"[1-9]*?x\^[3-9]+", // validar se tem algo fora do comum com a notação LP
-        @"^([0-9]*?x\*\*2){1}", // encontrar o 'A' com a notação LP
+        @"^(([0-9]*?x\*\*2){1})|(([0-9]*?x\^2){1})", // encontrar o 'A' independente da notação
         @"(\+|-[0-9]+\*x){1}", // encontrar o 'B'
         @"(([+\-])[0-9]+)?(=0){1}$", // encontrar o 'C'
-        @"^([0-9]*?x\^2){1}", // encontrar o 'A' com a notação circunflexa
-        @"x|(\*\*2)|(^2)", //remover todos os "não números" do A
-        @"x|\*" //remover todos os "não números" de B
+        @"[x]|(\*\*2)|(\^2)", //remover todos os "não números" do A
+        @"[x]|\*", //remover todos os "não números" de B
+        @"[=0]", //remover todos os "não números" de C
     };
     protected void TestesEntradaLp(string entradaSanitizada)
     {
