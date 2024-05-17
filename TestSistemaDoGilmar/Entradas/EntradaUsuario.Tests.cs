@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using SistemaDoGilmar;
 using SistemaDoGilmar.Enums;
 using SistemaDoGilmar.Exceptions;
@@ -45,5 +46,13 @@ public class EntradaUsuarioTest
                 TipoEntrada.NotacaoExpoenteLinguagensProgramacao
             );
         });
+    }
+    [Test]
+    public void VerificarSeparacapEntradaLp_VerificarSeEstaSeparando()
+    {
+        _entradaUsuarioLp = new EntradaUsuario(
+            "4x**2 - 2*x + 5 = 0",
+            TipoEntrada.NotacaoExpoenteLinguagensProgramacao
+        );
     }
 }
