@@ -1,4 +1,4 @@
-﻿using System;
+﻿using SistemaDoGilmar.EntradasUsuario;
 
 namespace SistemaDoGilmar
 {
@@ -6,8 +6,25 @@ namespace SistemaDoGilmar
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("qual excercício quer ver? ()");
-            Console.R
+            MenuPrincipal menuPrincipal = new ();
+            switch (menuPrincipal.opcaoEscolhida)
+            {
+                case 1:
+                    Formulas(
+                        menuPrincipal.MenuFormulas()
+                    );
+                break;
+            }
+        }
+
+        private static void Formulas(int formula)
+        {
+            switch (formula)
+            {
+                case 1:
+
+                break;
+            }
         }
     }
 }
