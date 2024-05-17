@@ -1,24 +1,22 @@
-﻿using System;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
-using SistemaDoGilmar;
+﻿using NUnit.Framework;
+using SistemaDoGilmar.CalculadoraDeFormulas;
 using SistemaDoGilmar.Enums;
 using SistemaDoGilmar.Exceptions;
 
 namespace TestSistemaDoGilmar.Entradas;
 
 [TestFixture]
-public class EntradaUsuarioTest
+public class CalculadoraBhaskaraTest
 {
-    private EntradaUsuario _entradaUsuarioCircunflexa;
-    private EntradaUsuario _entradaUsuarioLp;
+    private CalculadoraBhaskara _calculadoraBhaskaraCircunflexa;
+    private CalculadoraBhaskara _calculadoraBhaskaraLp;
 
     [Test]
     public void VerificarSeparacaoEntradaLp_sanitizarEntrada()
     {
         Assert.Catch<NonSimplifiedEquationException>(() =>
         {
-            _entradaUsuarioLp = new EntradaUsuario(
+            _calculadoraBhaskaraLp = new CalculadoraBhaskara(
                 "   X**2 + 1   ",
                 TipoEntrada.NotacaoExpoenteLinguagensProgramacao
             ); ;
@@ -30,7 +28,7 @@ public class EntradaUsuarioTest
     {
         Assert.Catch<NonSimplifiedEquationException>(() =>
         {
-            _entradaUsuarioLp = new EntradaUsuario(
+            _calculadoraBhaskaraLp = new CalculadoraBhaskara(
                 entrada,
                 TipoEntrada.NotacaoExpoenteLinguagensProgramacao
             );
@@ -39,12 +37,12 @@ public class EntradaUsuarioTest
     [TestCase("5x**2 -4*x +8 = 0", 5, -4, 8)]
     public void VerificarSeparacapEntradaLp_VerificarSeEstaSeparando(string entrada, int a, int b, int c)
     {
-        _entradaUsuarioLp = new EntradaUsuario(
+        _calculadoraBhaskaraLp = new CalculadoraBhaskara(
             entrada,
             TipoEntrada.NotacaoExpoenteLinguagensProgramacao
         );
-        Assert.AreEqual(a, _entradaUsuarioLp.Equacao['a']);
-        Assert.AreEqual(b, _entradaUsuarioLp.Equacao['b']);
-        Assert.AreEqual(c, _entradaUsuarioLp.Equacao['c']);
+        Assert.AreEqual(a, _calculadoraBhaskaraLp.Equacao['a']);
+        Assert.AreEqual(b, _calculadoraBhaskaraLp.Equacao['b']);
+        Assert.AreEqual(c, _calculadoraBhaskaraLp.Equacao['c']);
     }
 }
