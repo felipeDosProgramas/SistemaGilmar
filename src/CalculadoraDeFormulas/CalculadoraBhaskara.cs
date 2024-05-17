@@ -4,14 +4,14 @@ using System.Linq;
 using SistemaDoGilmar.Abstracts;
 using SistemaDoGilmar.Enums;
 
-namespace SistemaDoGilmar;
+namespace SistemaDoGilmar.CalculadoraDeFormulas;
 
-public class EntradaUsuario : AValidacoesEntradaUsuario
+public class CalculadoraBhaskara : AValidacoesEntradaUsuario
 {
     public string Entrada { get; set; }
     public Dictionary<char, int> Equacao { get; set; }
 
-    public EntradaUsuario(string entrada, TipoEntrada tipoEntrada)
+    public CalculadoraBhaskara(string entrada, TipoEntrada tipoEntrada)
     {
         Action<string> validacoes = tipoEntrada == TipoEntrada.NotacaoExpoenteLinguagensProgramacao
             ? TestesEntradaLp
