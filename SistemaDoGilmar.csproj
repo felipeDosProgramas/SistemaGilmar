@@ -42,6 +42,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="src\Abstracts\AValidacoesEntradaUsuario.cs" />
         <Compile Include="src\EntradaUsuario.cs" />
         <Compile Include="src\Enums\TipoEntrada.cs" />
         <Compile Include="src\Exceptions\NonQuadraticEquationException.cs" />

@@ -1,32 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
+using SistemaDoGilmar.Abstracts;
 using SistemaDoGilmar.Enums;
-using SistemaDoGilmar.Exceptions;
 
 namespace SistemaDoGilmar;
 
-public class EntradaUsuario
+public class EntradaUsuario : AValidacoesEntradaUsuario
 {
-    private readonly string[] _regexes = new[]
-    {
-        @"^([0-9]*?x\*\*2){1}(\+|-[0-9]+\*x)?(([+\-])[0-9]+)?(=0){1}$",
-        @"[1-9]x\*\*[3-9]+",
-        @"^([0-9]*?x\^2){1}(\+|-[0-9]+\*x)?(([+\-])[0-9]+)?(=0){1}$",
-        @"[1-9]*?x\^[3-9]+",
-        @"^([0-9]*?x\*\*2){1}",
-        @"(\+|-[0-9]+\*x){1}",
-        @"(([+\-])[0-9]+)?(=0){1}$",
-        @"^([0-9]*?x\^2){1}",
-    };
     public string Entrada { get; set; }
     public Dictionary<char, int> Equacao { get; set; }
-    private TipoEntrada _tipoEntrada;
 
     public EntradaUsuario(string entrada, TipoEntrada tipoEntrada)
     {
-        _tipoEntrada = tipoEntrada;
         Action<string> validacoes = tipoEntrada == TipoEntrada.NotacaoExpoenteLinguagensProgramacao
             ? TestesEntradaLp
             : TestesEntradaCircunflexa;
@@ -50,38 +36,25 @@ public class EntradaUsuario
     {
         entrada = entrada.Split(separador)
             .Select(str => str.Trim())
-            .Aggregate((anterior, proximo) => anterior + separador + proximo);
+            .Aggregate(
+                (anterior, proximo) => anterior + separador + proximo
+            );
     }
 
-    /// <exception cref="NonSimplifiedEquationException"></exception>
-    /// <exception cref="NonQuadraticEquationException"></exception>
-    private string ValidaEntrada(string entradaSanitizada, Action<string> testesEntrada)
-    {
-        testesEntrada(entradaSanitizada);
-        return entradaSanitizada;
-    }
+    private void AdicionarANaEntradaDividida(ref Dictionary<char, int> entradaDividida)
+        => entradaDividida.Add(
+            'a',
+            EncontrarItemNaStringValidada(new []
+                    { Regexes[5], Regexes[6], Regexes[8] },
+                Entrada
+            )
+        );
 
-    private void TestesEntradaLp(string entradaSanitizada)
-    {
-        if (!new Regex(_regexes[0]).IsMatch(entradaSanitizada))
-            throw new NonSimplifiedEquationException();
-        if (new Regex(_regexes[1]).IsMatch(entradaSanitizada))
-            throw new NonQuadraticEquationException();
-    }
-
-    private void TestesEntradaCircunflexa(string entradaSanitizada)
-    {
-        if (!new Regex(_regexes[2]).IsMatch(entradaSanitizada))
-            throw new NonSimplifiedEquationException();
-        if (new Regex(_regexes[1]).IsMatch(entradaSanitizada))
-            throw new NonQuadraticEquationException();
-    }
     private Dictionary<char, int> DividirComNotacaoLp()
     {
-        Entrada = Regex.Replace(Entrada, @"/x\*\*0/", "1");
-        string[] entradaDividida = Entrada.Split('x');
-        Dictionary<char, int> mockEntradaDividida = new Dictionary<char, int>();
-        return mockEntradaDividida;
+        Dictionary<char, int> entradaDividida = new Dictionary<char, int>();
+
+        return entradaDividida;
     }
 
 }
