@@ -45,6 +45,8 @@
         <Compile Include="src\Abstracts\AValidacoesEntradaUsuario.cs" />
         <Compile Include="src\CalculadoraDeFormulas\CalculadoraBhaskara.cs" />
         <Compile Include="src\CalculadoraDeFormulas\Forca.cs" />
+        <Compile Include="src\CalculadoraDeFormulas\Velocidade.cs" />
+        <Compile Include="src\EntradasUsuario\MenuCalculadoraBhaskara.cs" />
         <Compile Include="src\EntradasUsuario\MenuPrincipal.cs" />
         <Compile Include="src\Enums\TipoEntrada.cs" />
         <Compile Include="src\Exceptions\NonQuadraticEquationException.cs" />
