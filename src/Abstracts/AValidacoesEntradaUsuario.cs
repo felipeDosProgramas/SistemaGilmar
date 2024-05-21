@@ -26,6 +26,11 @@ public abstract class AValidacoesEntradaUsuario
         @"[x]|\*", //remover todos os "não números" de B
         @"[=0]", //remover todos os "não números" de C
     };
+    /// <summary>
+    /// Realiza a validação da equação quando a mesma está no formato de entrada LP
+    /// </summary>
+    /// <exception cref="NonSimplifiedEquationException"></exception>
+    /// <exception cref="NonQuadraticEquationException"></exception>
     protected void TestesEntradaLp(string entradaSanitizada)
     {
         if (!new Regex(Regexes[0]).IsMatch(entradaSanitizada))
@@ -33,7 +38,11 @@ public abstract class AValidacoesEntradaUsuario
         if (new Regex(Regexes[1]).IsMatch(entradaSanitizada))
             throw new NonQuadraticEquationException();
     }
-
+    /// <summary>
+    /// Realiza a validação da equação quando a mesma está no formato de entrada Circunflexa
+    /// </summary>
+    /// <exception cref="NonSimplifiedEquationException"></exception>
+    /// <exception cref="NonQuadraticEquationException"></exception>
     protected void TestesEntradaCircunflexa(string entradaSanitizada)
     {
         if (!new Regex(Regexes[2]).IsMatch(entradaSanitizada))
@@ -52,9 +61,8 @@ public abstract class AValidacoesEntradaUsuario
     {
         return Convert.ToInt32(
             regexesAplicaveis
-                .Aggregate(stringValidada,
-                    (current, regexAplicavel) => new Regex(regexAplicavel)
-                        .Replace(current, ""))
+                .Aggregate(stringValidada, (current, regexAplicavel)
+                    => new Regex(regexAplicavel).Replace(current, ""))
         );
     }
 }
