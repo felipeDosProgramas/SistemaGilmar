@@ -67,7 +67,7 @@ public abstract class AValidacoesEntradaUsuario : ACalculadoraEQuadratica
                     => new Regex(regexAplicavel).Replace(current, ""))
         );
     }
-    protected void AdicionarANaEntradaDividida(ref Dictionary<char, int> entradaDividida, string entrada)
+    protected void AdicionarANaEntradaDividida(ref Dictionary<char, double> entradaDividida, string entrada)
         => entradaDividida.Add(
             'a',
             EncontrarItemNaStringValidada(new []
@@ -75,7 +75,7 @@ public abstract class AValidacoesEntradaUsuario : ACalculadoraEQuadratica
                 entrada
             )
         );
-    protected void AdicionarBNaEntradaDividida(ref Dictionary<char, int> entradaDividida, string entrada)
+    protected void AdicionarBNaEntradaDividida(ref Dictionary<char, double> entradaDividida, string entrada)
         => entradaDividida.Add(
             'b',
             EncontrarItemNaStringValidada(new []
@@ -84,7 +84,7 @@ public abstract class AValidacoesEntradaUsuario : ACalculadoraEQuadratica
             )
         );
 
-    protected void AdicionarCNaEntradaDividida(ref Dictionary<char, int> entradaDividida, string entrada)
+    protected void AdicionarCNaEntradaDividida(ref Dictionary<char, double> entradaDividida, string entrada)
         => entradaDividida.Add(
             'c',
             EncontrarItemNaStringValidada(new[]

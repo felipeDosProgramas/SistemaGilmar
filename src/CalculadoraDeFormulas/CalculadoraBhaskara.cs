@@ -8,9 +8,9 @@ namespace SistemaDoGilmar.CalculadoraDeFormulas;
 
 public class CalculadoraBhaskara(string entrada, TipoEntrada tipoEntrada) : AValidacoesEntradaUsuario
 {
-    private readonly string _entradaSanitizada = SanitizaEntrada(entrada.ToLower().Trim());
+    private string _entradaSanitizada = SanitizaEntrada(entrada.ToLower().Trim());
     public string Entrada { get; set; }
-    public Dictionary<char, int> Equacao { get; private set; }
+    public Dictionary<char, double> Equacao { get; private set; }
 
     public bool EntradaEValida()
     {
@@ -31,6 +31,11 @@ public class CalculadoraBhaskara(string entrada, TipoEntrada tipoEntrada) : AVal
             return false;
         }
     }
+
+    public void SetNovaEntrada(string entrada)
+    {
+        _entradaSanitizada = SanitizaEntrada(entrada.ToLower().Trim());
+    }
     private static string SanitizaEntrada(string entrada)
     {
         foreach (var s in new [] { '+', '-', 'x', '=' })
@@ -47,37 +52,12 @@ public class CalculadoraBhaskara(string entrada, TipoEntrada tipoEntrada) : AVal
             );
     }
 
-    private void AdicionarANaEntradaDividida(ref Dictionary<char, int> entradaDividida)
-        => entradaDividida.Add(
-            'a',
-            EncontrarItemNaStringValidada(new []
-                    { Regexes[6], Regexes[5], Regexes[7] },
-                Entrada
-            )
-        );
-    private void AdicionarBNaEntradaDividida(ref Dictionary<char, int> entradaDividida)
-        => entradaDividida.Add(
-            'b',
-            EncontrarItemNaStringValidada(new []
-                    { Regexes[6], Regexes[4], Regexes[8] },
-                Entrada
-            )
-        );
-    private void AdicionarCNaEntradaDividida(ref Dictionary<char, int> entradaDividida)
-        => entradaDividida.Add(
-            'c',
-            EncontrarItemNaStringValidada(new []
-                    { Regexes[4], Regexes[5], Regexes[9] },
-                Entrada
-            )
-        );
-    private Dictionary<char, int> DividirTermos()
+    private Dictionary<char, double> DividirTermos()
     {
-        Dictionary<char, int> entradaDividida = new ();
-        AdicionarANaEntradaDividida(ref entradaDividida);
-        AdicionarBNaEntradaDividida(ref entradaDividida);
-        AdicionarCNaEntradaDividida(ref entradaDividida);
+        Dictionary<char, double> entradaDividida = new ();
+        AdicionarANaEntradaDividida(ref entradaDividida, Entrada);
+        AdicionarBNaEntradaDividida(ref entradaDividida, Entrada);
+        AdicionarCNaEntradaDividida(ref entradaDividida, Entrada);
         return entradaDividida;
     }
-
 }
