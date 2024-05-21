@@ -17,7 +17,7 @@ public class MenuCalculadoraBhaskara
 
     private const string MensagemSolicitarEquacao
         = "Escreva sua Equação seguindo o padrão escolhido: \n";
-    private void EscolherTipoDeNotacao()
+    public void EscolherTipoDeNotacao()
     {
         Console.WriteLine(MensagemEscolherNotacao);
         int opcao = Convert.ToInt32(Console.ReadLine());

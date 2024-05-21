@@ -6,18 +6,11 @@ using SistemaDoGilmar.Enums;
 
 namespace SistemaDoGilmar.CalculadoraDeFormulas;
 
-public class CalculadoraBhaskara : AValidacoesEntradaUsuario
+public class CalculadoraBhaskara(string entrada, TipoEntrada tipoEntrada) : AValidacoesEntradaUsuario
 {
-    private string _entradaSanitizada;
-    private TipoEntrada _tipoEntrada;
+    private readonly string _entradaSanitizada = SanitizaEntrada(entrada.ToLower().Trim());
     public string Entrada { get; set; }
-    public Dictionary<char, int> Equacao { get; set; }
-
-    public CalculadoraBhaskara(string entrada, TipoEntrada tipoEntrada)
-    {
-        _entradaSanitizada = SanitizaEntrada(entrada.ToLower().Trim());
-        _tipoEntrada = tipoEntrada;
-    }
+    public Dictionary<char, int> Equacao { get; private set; }
 
     public bool EntradaEValida()
     {
@@ -25,10 +18,11 @@ public class CalculadoraBhaskara : AValidacoesEntradaUsuario
         {
             Entrada = ValidaEntrada(
                 _entradaSanitizada,
-                _tipoEntrada == TipoEntrada.NotacaoExpoenteLinguagensProgramacao
+                tipoEntrada == TipoEntrada.NotacaoExpoenteLinguagensProgramacao
                     ? TestesEntradaLp
                     : TestesEntradaCircunflexa
             );
+            Equacao = DividirTermos();
             return true;
         }
         catch (Exception e)
@@ -79,7 +73,7 @@ public class CalculadoraBhaskara : AValidacoesEntradaUsuario
         );
     private Dictionary<char, int> DividirTermos()
     {
-        Dictionary<char, int> entradaDividida = new Dictionary<char, int>();
+        Dictionary<char, int> entradaDividida = new ();
         AdicionarANaEntradaDividida(ref entradaDividida);
         AdicionarBNaEntradaDividida(ref entradaDividida);
         AdicionarCNaEntradaDividida(ref entradaDividida);
