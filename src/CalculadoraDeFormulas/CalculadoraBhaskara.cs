@@ -8,29 +8,43 @@ namespace SistemaDoGilmar.CalculadoraDeFormulas;
 
 public class CalculadoraBhaskara : AValidacoesEntradaUsuario
 {
+    private string _entradaSanitizada;
+    private TipoEntrada _tipoEntrada;
     public string Entrada { get; set; }
     public Dictionary<char, int> Equacao { get; set; }
 
     public CalculadoraBhaskara(string entrada, TipoEntrada tipoEntrada)
     {
-        Action<string> validacoes = tipoEntrada == TipoEntrada.NotacaoExpoenteLinguagensProgramacao
-            ? TestesEntradaLp
-            : TestesEntradaCircunflexa;
-        Entrada = ValidaEntrada(
-            SanitizaEntrada(entrada.ToLower().Trim()),
-            validacoes
-        );
-        Equacao = DividirTermos();
+        _entradaSanitizada = SanitizaEntrada(entrada.ToLower().Trim());
+        _tipoEntrada = tipoEntrada;
     }
 
-    private string SanitizaEntrada(string entrada)
+    public bool EntradaEValida()
+    {
+        try
+        {
+            Entrada = ValidaEntrada(
+                _entradaSanitizada,
+                _tipoEntrada == TipoEntrada.NotacaoExpoenteLinguagensProgramacao
+                    ? TestesEntradaLp
+                    : TestesEntradaCircunflexa
+            );
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Exceção capturada: {e.GetType()} \n Mensagem: {e.Message}");
+            return false;
+        }
+    }
+    private static string SanitizaEntrada(string entrada)
     {
         foreach (var s in new [] { '+', '-', 'x', '=' })
             TrimaPartesEquacao(s, ref entrada);
         return entrada;
     }
 
-    private void TrimaPartesEquacao(char separador, ref string entrada)
+    private static void TrimaPartesEquacao(char separador, ref string entrada)
     {
         entrada = entrada.Split(separador)
             .Select(str => str.Trim())
