@@ -16,7 +16,7 @@ public abstract class AValidacoesEntradaUsuario : ACalculadoraEQuadratica
     /// </summary>
     private readonly string[] _regexes = new[]
     {
-        @"^([0-9]*?x\*\*2){1}(\+|-[0-9]+\*x)?(([+\-])[0-9]+)?(=0){1}$", // identificar a conta inteira com a notação LP
+        @"^(([+\-])[0-9]*?x\*\*2){1}(\+|-[0-9]+\*x)?(([+\-])[0-9]+)?(=0){1}$", // identificar a conta inteira com a notação LP
         @"[1-9]x\*\*[3-9]+", // validar se tem algo fora do comum com a notação LP
         @"^([0-9]*?x\^2){1}(\+|-[0-9]+\*x)?(([+\-])[0-9]+)?(=0){1}$", // identificar a conta inteira com a notação circunflexa
         @"[1-9]*?x\^[3-9]+", // validar se tem algo fora do comum com a notação LP
@@ -42,6 +42,7 @@ public abstract class AValidacoesEntradaUsuario : ACalculadoraEQuadratica
     /// <summary>
     /// Realiza a validação da equação quando a mesma está no formato de entrada Circunflexa
     /// </summary>
+    /// <param name="entradaSanitizada">string previamente sanitizada</param>
     /// <exception cref="NonSimplifiedEquationException"></exception>
     /// <exception cref="NonQuadraticEquationException"></exception>
     protected void TestesEntradaCircunflexa(string entradaSanitizada)
@@ -59,7 +60,7 @@ public abstract class AValidacoesEntradaUsuario : ACalculadoraEQuadratica
         return entradaSanitizada;
     }
 
-    private int EncontrarItemNaStringValidada(  string[] regexesAplicaveis, string stringValidada)
+    private int EncontrarItemNaStringValidada(string[] regexesAplicaveis, string stringValidada)
     {
         return Convert.ToInt32(
             regexesAplicaveis

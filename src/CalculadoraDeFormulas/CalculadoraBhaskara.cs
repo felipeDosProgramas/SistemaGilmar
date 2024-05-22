@@ -27,6 +27,7 @@ public class CalculadoraBhaskara(string entrada, TipoEntrada tipoEntrada) : AVal
         }
         catch (Exception e)
         {
+            Console.Clear();
             Console.WriteLine($"Exceção capturada: {e.GetType()} \n Mensagem: {e.Message}");
             return false;
         }

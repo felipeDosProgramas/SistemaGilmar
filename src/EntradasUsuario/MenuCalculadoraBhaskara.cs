@@ -10,10 +10,10 @@ public class MenuCalculadoraBhaskara
     public string Equacao { get; private set; }
     private const string MensagemEscolherNotacao
         = """
-          antes de escrever sua Equação quadrática... \n 
+          antes de escrever sua Equação quadrática... 
           escolha qual tipo de notação vai usar para representar a exponenciação:
           1 - Notação com acento circunflexo (Ex: 2*x^2 + 2*x -1 =0 )
-          2 - Notação com asterisco duplo(**) (Ex: 2*x**x + 2*x -1 =0 )
+          2 - Notação com asterisco duplo(**) (Ex: 2*x**2 + 2*x -1 =0 )
         """;
 
     private const string MensagemSolicitarEquacao
@@ -38,13 +38,13 @@ public class MenuCalculadoraBhaskara
         }
     }
 
-    public void SetEntradaDaEquacao()
+    public string GetEntradaDaEquacao()
     {
         Console.WriteLine(MensagemSolicitarEquacao);
-        Equacao = Console.ReadLine();
+        return Equacao = Console.ReadLine();
     }
 
-    public string ImprimeRaizes(Dictionary<string, double> raizes) => raizes.Count > 1
+    public string GetSaidaRaizes(Dictionary<string, double> raizes) => raizes.Count > 1
             ? $"Seu x1 é {raizes["x1"]} e seu x2 é {raizes["x2"]}"
             : $"Sua equação tem apenas o x1, tal qual é {raizes["x1"]}";
 
