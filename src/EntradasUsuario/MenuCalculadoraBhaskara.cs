@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SistemaDoGilmar.Enums;
 
 namespace SistemaDoGilmar.EntradasUsuario;
@@ -42,4 +43,9 @@ public class MenuCalculadoraBhaskara
         Console.WriteLine(MensagemSolicitarEquacao);
         Equacao = Console.ReadLine();
     }
+
+    public string ImprimeRaizes(Dictionary<string, double> raizes) => raizes.Count > 1
+            ? $"Seu x1 é {raizes["x1"]} e seu x2 é {raizes["x2"]}"
+            : $"Sua equação tem apenas o x1, tal qual é {raizes["x1"]}";
+
 }
